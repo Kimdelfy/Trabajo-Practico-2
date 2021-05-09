@@ -38,6 +38,14 @@ public class TestFechaCompleta {
 		
 		dia1.compara(dia2);
 		
+		long cant = dia1.cantidadDias(dia2);
+		System.out.println("La cantidad de dias entreambas fechas es: "+ cant);
+		
+		System.out.print("Ingrese la cantidad de dias a sumar o restar a la fecha 1 ingresada");
+		int dia= entrada.nextInt();
+		System.out.println("La fecha nueva es: " +dia1.suma(dia).toString());
+		
+		dia1.diaSemana();
 	}
 
 }

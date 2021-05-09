@@ -1,5 +1,7 @@
 package tp2Ej5;
 
+import java.util.Calendar;
+
 public class FechaCompleta {
 	
 		private int dia;
@@ -158,13 +160,37 @@ public class FechaCompleta {
 			cantidad=cantidad+Math.abs(fecha2Ju-diaJuliano());
 			return cantidad;
 		}
-		
+		//Ver porque me esta dando mal la cuenta
 		public FechaCompleta suma(int dias) {
-			int fechaJu = diaJuliano();
+			int fechaJu = this.diaJuliano();
+			System.out.println(fechaJu);
 			fechaJu=fechaJu+dias;
+			System.out.println(fechaJu);
 			FechaCompleta fecha=conversor(fechaJu,this.año);
 			
 			return new FechaCompleta(dia,mes,año);
+		}
+		
+		public void diaSemana() {
+			Calendar c = Calendar.getInstance();
+			c.set(mes, dia, año);
+			int diaSem = c.get(Calendar.DAY_OF_WEEK);
+			switch (diaSem) {
+			case 1:System.out.println("El dia de la semana de "+ toString()+ "es Domingo");
+			break;
+			case 2:System.out.println("El dia de la semana de "+ toString()+ "es Lunes");
+			break;
+			case 3:System.out.println("El dia de la semana de "+ toString()+ "es Martes");
+			break;
+			case 4:System.out.println("El dia de la semana de "+ toString()+ "es Miercoles");
+			break;
+			case 5:System.out.println("El dia de la semana de "+ toString()+ "es Jueves");
+			break;
+			case 6:System.out.println("El dia de la semana de "+ toString()+ "es Viernes");
+			break;
+			default:System.out.println("El dia de la semana de "+ toString()+ "es Sabado");
+			break;
+			}
 		}
 }
 
