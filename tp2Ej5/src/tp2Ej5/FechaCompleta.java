@@ -32,9 +32,8 @@ public class FechaCompleta {
 		}
 		
 		//Convierte de Dia Juliano a Gregoriano
-		public FechaCompleta conversor (FechaCompleta fecha) {
+		public FechaCompleta conversor (int dia, int año) {
 			int i=0;
-			dia=this.diaJuliano(); //Sera asi o this.diaJ???
 			while (dia>cantDias[i]) {
 				mes++;
 				dia=dia-cantDias[i];
@@ -43,35 +42,23 @@ public class FechaCompleta {
 			return new FechaCompleta(dia,mes,año);
 		}
 		
-		public void compara (FechaCompleta fecha1,FechaCompleta fecha2) {
-			fecha1.dia=diaJuliano();
-			fecha2.dia=diaJuliano();
-			int año1 =fecha1.año;
+		public void compara (FechaCompleta fecha2) {
+			
+			int fecha2Juliano = fecha2.diaJuliano();
 			int año2 =fecha2.año;
-			int dia1=fecha1.dia;
-			int dia2=fecha2.dia;
-			if (fecha1.equals(fecha2)) {
-				System.out.println("Ambas fechas son iguales"+fecha1 + " = " + fecha2);
+			
+			if (this.equals(fecha2)) {
+				System.out.println("Ambas fechas son iguales"+ toString() + " = " + fecha2.toString());
 			}
 			else {
-				if (año1==año2) {
-					if (fecha1.dia<fecha2.dia) {
-						System.out.println(fecha1 + " Es menor que " + fecha2);
-					}
-					else {
-						System.out.println(fecha1 + " Es mayor que " + fecha2);
-					}
+				
+				if ( año < año2 || año == año2 && diaJuliano() < fecha2Juliano) {
+					System.out.println(toString() + " Es menor que " + fecha2.toString());
 				}
 				else {
-					if (año1<año2) {
-						System.out.println(fecha1 + " Es menor que " + fecha2);
-					}
-					else {
-						System.out.println(fecha1 + " Es mayor que " + fecha2);
-					}
-				}		
+					System.out.println(toString() + " Es mayor que " + fecha2.toString());
+				}
 			}
-			
 		}
 		
 		
@@ -156,7 +143,29 @@ public class FechaCompleta {
 				dia--;
 			}
 		}
+		@Override
+		public String toString() {
+			return "FechaCompleta [dia=" + dia + ", mes=" + mes + ", año=" + año + "]";
+		}
 		
+		public long cantidadDias (FechaCompleta fecha2) {
+			//int fecha1Ju = diaJuliano();
+			int fecha2Ju = fecha2.diaJuliano();
+			int año2 =fecha2.año;
+			long cantidad=0;
+			cantidad=Math.abs(año2-this.año);
+			cantidad=cantidad*365;
+			cantidad=cantidad+Math.abs(fecha2Ju-diaJuliano());
+			return cantidad;
+		}
+		
+		public FechaCompleta suma(int dias) {
+			int fechaJu = diaJuliano();
+			fechaJu=fechaJu+dias;
+			FechaCompleta fecha=conversor(fechaJu,this.año);
+			
+			return new FechaCompleta(dia,mes,año);
+		}
 }
 
 

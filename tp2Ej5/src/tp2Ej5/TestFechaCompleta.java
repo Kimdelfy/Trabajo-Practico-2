@@ -35,7 +35,9 @@ public class TestFechaCompleta {
 		System.out.print("Dia (dd): ");
 		int d2 = entrada.nextInt();
 		dia2.setDia(d2);
-
+		
+		dia1.compara(dia2);
+		
 	}
 
 }
