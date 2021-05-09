@@ -1,4 +1,4 @@
-package tp2Ej5;
+package fehc;
 
 import java.util.Calendar;
 
@@ -23,26 +23,33 @@ public class FechaCompleta {
 		
 		//Convierte Gregoriano a Dia Juliano
 		public int diaJuliano() {
-			int i=0;
 			int diaJ=0;
-			while (i!=mes-1) {
-				diaJ=cantDias[i];
-				i++;
+			for(int i=0;i<mes-1;i++) {
+				diaJ+=cantDias[i];
 			}
 			diaJ=diaJ+dia;
 			return diaJ;
 		}
 		
 		//Convierte de Dia Juliano a Gregoriano
+		/*
+		 * Correciones:
+		 * - La funcion deberia ser privada ya que se corresponde con con una funcionalidad que solo usa la clase de manera auxliar
+		 * - No tiene en cuenta los años, se deberia veficiar si la cantidad de dias es superior a 365 antes de entrar en el while
+		 * - Habria verficiar si el año es biciesto a la hora de convertir
+		 * -faltaba usar una variable auxiliar para el mes que empiece en enero
+		 */
 		public FechaCompleta conversor (int dia, int año) {
-			int i=0;
+			int i=0,mesAux = 1;
 			while (dia>cantDias[i]) {
-				mes++;
+				mesAux++;
 				dia=dia-cantDias[i];
 				i++;
 			}
-			return new FechaCompleta(dia,mes,año);
+			return new FechaCompleta(dia,mesAux,año);
 		}
+		
+		
 		
 		public void compara (FechaCompleta fecha2) {
 			
@@ -161,6 +168,7 @@ public class FechaCompleta {
 			return cantidad;
 		}
 		//Ver porque me esta dando mal la cuenta
+		//estabas retornando una fecha nueva en lugar de la que habias creado con los dias agregados
 		public FechaCompleta suma(int dias) {
 			int fechaJu = this.diaJuliano();
 			System.out.println(fechaJu);
@@ -168,7 +176,7 @@ public class FechaCompleta {
 			System.out.println(fechaJu);
 			FechaCompleta fecha=conversor(fechaJu,this.año);
 			
-			return new FechaCompleta(dia,mes,año);
+			return fecha;
 		}
 		
 		public void diaSemana() {
