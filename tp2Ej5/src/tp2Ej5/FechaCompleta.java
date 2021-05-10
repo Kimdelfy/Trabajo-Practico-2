@@ -158,7 +158,7 @@ public class FechaCompleta {
 		}
 		
 		public long cantidadDias (FechaCompleta fecha2) {
-			//int fecha1Ju = diaJuliano();
+			
 			int fecha2Ju = fecha2.diaJuliano();
 			int año2 =fecha2.año;
 			long cantidad=0;
@@ -167,9 +167,23 @@ public class FechaCompleta {
 			cantidad=cantidad+Math.abs(fecha2Ju-diaJuliano());
 			return cantidad;
 		}
-		//Ver porque me esta dando mal la cuenta
-		//estabas retornando una fecha nueva en lugar de la que habias creado con los dias agregados
+		
+		//Lo usa para que devuelva cantidad de dias si es bisiesto o no
+				private int AñoBisiesto() {
+					if (bisiesto()) {
+						return 366;
+					}
+					else {
+						return 365;
+					}
+				}
+		
 		public FechaCompleta suma(int dias) {
+			//para que tenga en cuenta de modificar el año si supera la cantidad de dias de ese año
+			while (dias-AñoBisiesto()>AñoBisiesto()) {
+				this.año++;
+				dias=dias-AñoBisiesto();
+			}
 			int fechaJu = this.diaJuliano();
 			System.out.println(fechaJu);
 			fechaJu=fechaJu+dias;
@@ -201,5 +215,7 @@ public class FechaCompleta {
 			}
 		}
 }
+
+
 
 
